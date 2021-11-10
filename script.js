@@ -62,7 +62,20 @@ $(document).ready(function () {
         backSpeed: 60,
         loop: true
     });
-
+    
+    // gallery card script
+    var folder = "images";
+    $.ajax({
+        url: folder,
+        success: function (data) {
+            $(data).find("a").attr("href", function (i, val) {
+                if (val.match(/\.(jpe?g|png|gif)$/)) {
+                    $(".gal-cont").append("<img src='" + val + "'>");
+                }
+            });
+        }
+    });
+    
     // owl carousel script
     $('.carousel').owlCarousel({
         margin: 20,
@@ -83,21 +96,4 @@ $(document).ready(function () {
             }
         }
     });
-
-    // gallery card script
-    // let count = $('');
-    // for (let i = 1; i < 11; i++) {
-    //     $('.gal-cont').append('<figure class="grid-item"><img src="images/profile-' + i + '.jpg" alt=""></figure>');
-    //     console.log('profile-' + i);
-    // };
-    // console.log("heybarbara");
-
-    const fs = require('fs');
-    const folder = './images/';
-
-    fs.readdir(folder, (err, files) => {
-        files.forEach(file => {
-            console.log(file);
-        });
-    })
 });
